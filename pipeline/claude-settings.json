@@ -1,0 +1,85 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(pnpm:*)",
+      "Bash(git:*)",
+      "Bash(gh:*)",
+      "Bash(find:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(grep:*)",
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "mcp__playwright__*"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(curl:*|wget:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
+      "Bash(git push --force)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit:*.ts|Edit:*.tsx|Write:*.ts|Write:*.tsx",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx tsc --noEmit 2>&1 | tail -20; exit 0",
+            "timeout": 30000
+          }
+        ]
+      },
+      {
+        "matcher": "Edit:*.ts|Edit:*.tsx|Write:*.ts|Write:*.tsx",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx eslint --no-error-on-unmatched-pattern $(echo $CLAUDE_TOOL_INPUT | jq -r '.file_path // empty') 2>&1 | tail -10; exit 0",
+            "timeout": 15000
+          }
+        ]
+      },
+      {
+        "matcher": "Edit:src/auth/*|Edit:src/api/*|Write:src/auth/*|Write:src/api/*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '⚠️  Security-sensitive file modified. /security-review recommended before PR.'"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo $CLAUDE_TOOL_INPUT | jq -r '.command // empty' | grep -qiE '(rm -rf|drop table|truncate|--force-with-lease)' && echo '{\"decision\": \"deny\", \"reason\": \"Destructive command blocked\"}' && exit 2; exit 0"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date -u +%Y-%m-%dT%H:%M:%SZ)] Session completed\" >> .claude/pipeline.log; exit 0"
+          }
+        ]
+      }
+    ]
+  }
+}

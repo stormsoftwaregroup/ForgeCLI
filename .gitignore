@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.env
+.env.local
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Bundled template's own build artifacts
+template/node_modules/
+template/client/node_modules/
+template/server/node_modules/
+template/client/dist/
+template/playwright-report/
+template/test-results/

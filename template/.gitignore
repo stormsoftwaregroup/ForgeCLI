@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+forge/logs/
+
+# Coverage
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE (keep shared settings if desired)
+.vscode/
+.idea/
+
+# Azure
+.azure/
+
+# Prisma
+server/prisma/*.db
+server/prisma/migrations/**/migration_lock.toml
+
+# Local uploads (dev only)
+server/uploads/
+
+# Forge
+.forge-improve-timestamp
+
+# Misc
+*.tsbuildinfo
+*.swp
+*.swo
