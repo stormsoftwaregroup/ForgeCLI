@@ -36,7 +36,7 @@ describe('Swagger spec', () => {
   });
 
   it('has API info', () => {
-    expect(swaggerSpec.info.title).toBe('Unicorn Forge Express API');
+    expect(swaggerSpec.info.title).toBe('Forge Template API');
     expect(swaggerSpec.info.version).toBe('1.0.0');
   });
 

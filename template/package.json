@@ -1,8 +1,8 @@
 {
-  "name": "unicorn-forge-express",
+  "name": "forge-template",
   "version": "1.0.0",
   "private": true,
-  "description": "Unicorn Forge Express — full-stack JavaScript project template",
+  "description": "Forge Template — full-stack JavaScript project template",
   "workspaces": [
     "client",
     "server"

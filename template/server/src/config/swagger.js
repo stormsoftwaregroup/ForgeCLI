@@ -4,7 +4,7 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Unicorn Forge Express API',
+      title: 'Forge Template API',
       version: '1.0.0',
       description: 'Auto-generated API documentation',
     },

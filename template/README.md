@@ -1,7 +1,6 @@
-# Unicorn Forge Express
+# Forge Template
 
 > Personal project accelerator. Clone, customize, ship.
-> [unicornforged.com](https://unicornforged.com)
 
 ## What Is This?
 
@@ -112,7 +111,7 @@ API docs are at **http://localhost:3001/api-docs**.
 ## Project Structure
 
 ```
-unicorn-forge-express/
+forge-template/
 ├── client/                    # React frontend (Vite)
 │   └── src/
 │       ├── components/        # Shared components (ProtectedRoute, ui/)
@@ -273,4 +272,4 @@ Every push to `main` and every pull request triggers the CI workflow (`.github/w
 
 ## License
 
-Private template. See [unicornforged.com](https://unicornforged.com).
+MIT licensed.
